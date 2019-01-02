@@ -41,6 +41,7 @@ require('credentials.php');
     forwardemail($from_address, $from_name, $subject, $body);
     // ... delete forwarded mail
     imap_delete($mbox, $i+1);
+    imap_expunge();
   }
 
   imap_close($mbox);
