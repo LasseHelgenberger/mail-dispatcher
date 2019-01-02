@@ -57,7 +57,6 @@ function forwardemail($from_address, $from_name, $subject, $body) {
   for($i = 0; $i < sizeof($recipients); $i++) {
     $mail = new PHPMailer(true);
 
-    $mail->SMTPDebug = 2; //FOR DEBUGGING
     $mail->isSMTP();
     $mail->Host = $cred_smtphost;
     $mail->SMTPAuth = true;
@@ -94,11 +93,12 @@ function getrecipients() {
   $query = "SELECT * FROM recipients";
   $result = mysqli_query($db, $query);
 
+  $recipients;
   while($row = mysqli_fetch_object($result)) {
-    echo $row->mailaddress."\n";
+    array_push($recipients, array($row->mailaddress, $row->firstname, $row->lastname);
   }
 
-  $res = array(array("test1@lasse.cc", "Lasse H1"), array("test2@lasse.cc", "Lasse H2"), array("test3@lasse.cc", "Lasse H3"));
-  return $res;
+//  $res = array(array("test1@lasse.cc", "Lasse H1"), array("test2@lasse.cc", "Lasse H2"), array("test3@lasse.cc", "Lasse H3"));
+  return $recipients;
 }
 ?>
