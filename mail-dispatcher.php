@@ -30,7 +30,7 @@ require('credentials.php');
     // ... get the header info
     $header = imap_headerinfo($mbox, $i+1);
     $from = $header->from[0];
-//for($i=0; $i<sizeof($from[0]); $i++){echo $i." - ".$from[0][$i];}
+echo $from->personal." - ".$from->adl;
     $from_address = $from->mailbox."@".$from->host;
     $from_name = $from->personal;
     $subject = $header->Subject;
