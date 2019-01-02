@@ -29,9 +29,9 @@ require('credentials.php');
   //for($i = 0; $i < 1; $i++) {
     // ... get the header info
     $header = imap_headerinfo($mbox, $i+1);
-//  $from = $header->fromaddress; <-- NOT WORKING HOW I INTENDED TODO
-  $from_address = "me@lasse.cc";//TODO
-  $from_name = "Lasse H";//TODO
+    $from = $header->from;
+    $from_address = $from[2]
+    $from_name = $from[0];
     $subject = $header->Subject;
     // ... get the body
     $body = imap_body($mbox, $i+1);
