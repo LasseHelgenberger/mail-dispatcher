@@ -12,8 +12,6 @@ or contact mail-dispatcher@lasse.cc
 
 */
 
-require_once('./vendor/autoload.php');
-
 maildispatcher();
 
 function maildispatcher() {
@@ -55,6 +53,7 @@ function forwardemail($from, $subject, $body) {
 //}
 //imap_close($mbox);
 
+require_once('./vendor/autoload.php');
 
 $mail = new PHPMailer();
 $mail->setFrom("testverteiler@evjp.de", "EVJP VERTEILER");
