@@ -31,7 +31,7 @@ require('credentials.php');
     $header = imap_headerinfo($mbox, $i+1);
 //  $from = $header->fromaddress; <-- NOT WORKING HOW I INTENDED TODO
   $from_address = "me@lasse.cc";
-  $from_name
+  $from_name = "Lasse H";
     $subject = $header->Subject;
 echo "FROM: ".$from."\n";
 echo "SUBJECT: ".$subject."\n";
