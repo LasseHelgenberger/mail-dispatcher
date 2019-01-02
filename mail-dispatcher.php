@@ -21,69 +21,73 @@ function maildispatcher() {
 
 require('credentials.php');
 
-//open imap stream
-$mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
+  //open imap stream
+  $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
 
-//for each message in the inbox...
-//for($i = 0; $i < imap_num_msg($mbox); $i++) {
-for($i = 0; $i < 1; $i++) {
+  //for each message in the inbox...
+  //for($i = 0; $i < imap_num_msg($mbox); $i++) {
+  for($i = 0; $i < 1; $i++) {
   // ...get the header info
-  $header = imap_headerinfo($mbox, $i+1);
-//  $from = $header->fromaddress; <-- NOT WORKING HOW I INTENDED
-$from = "me@lasse.cc";
-  $subject = $header->Subject;
+    $header = imap_headerinfo($mbox, $i+1);
+//  $from = $header->fromaddress; <-- NOT WORKING HOW I INTENDED TODO
+  $from_address = "me@lasse.cc";
+  $from_name
+    $subject = $header->Subject;
 echo "FROM: ".$from."\n";
 echo "SUBJECT: ".$subject."\n";
-  // ... get the body
-  $body = imap_body($mbox, $i+1);
+    // ... get the body
+    $body = imap_body($mbox, $i+1);
 echo "BODY:".$body."\n\n";
 
 //TODO check for Attachements
 echo "DEBUG: ".$cred_mailuser;
   // ... forward email
-  forwardemail($from, $subject, $body);
-}
-imap_close($mbox);
+    forwardemail($from_address, $from_name, $subject, $body);
+  }
+  imap_close($mbox);
 
 }
 
 
-function forwardemail($from, $subject, $body) {
+function forwardemail($from_address, $from_name, $subject, $body) {
 //TODO
 
-require('./vendor/autoload.php');
-require('credentials.php');
+  require('./vendor/autoload.php');
+  require('credentials.php');
+  $recipients = getrecipients();
 
-$mail = new PHPMailer(true);
+  for($i = 0; $i < sizeof($recipients); $i++) {
+    $mail = new PHPMailer(true);
 
-$mail->SMTPDebug = 2; //FOR DEBUGGING
-$mail->isSMTP();
-$mail->Host = $cred_smtphost;
-$mail->SMTPAuth = true;
-$mail->Username = $cred_mailuser;
-$mail->Password = $cred_mailpasswd;
-$mail->SMTPSecure = "tls";
-$mail->Port = 587;
+    $mail->SMTPDebug = 2; //FOR DEBUGGING
+    $mail->isSMTP();
+    $mail->Host = $cred_smtphost;
+    $mail->SMTPAuth = true;
+    $mail->Username = $cred_mailuser;
+    $mail->Password = $cred_mailpasswd;
+    $mail->SMTPSecure = "tls";
+    $mail->Port = 587;
 
-$mail->setFrom($cred_mailfrom, $cred_mailname);
-$mail->addAddress("test@lasse.cc", "Lasse H");
-$mail->addReplyTo($from, "FROM NAME");
+    $mail->setFrom($cred_mailfrom, $cred_mailname);
+    $mail->addAddress($recipients[$i][0], $recipients[$i][1]);
+    $mail->addReplyTo($from_address, $from_name);
 
-$mail->isHTML(true);
-$mail->Subject = $subject;
-$mail->Body = $body;
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body = $body;
 
-if($mail->send()) {
-  echo "DONE";
-} else {
-  echo "ERROR";
-}
+    if($mail->send()) {
+      echo "DONE";
+    } else {
+      echo "ERROR";
+    }
+  }
 }
 
 function getrecipients() {
 //TODO
 
-$res = array("test1@lasse.cc", "test2@lasse.cc", "test3@lasse.cc");
-return $res;
+  $res = array(array("test1@lasse.cc", "Lasse H1"), array("test2@lasse.cc", "Lasse H2"), array("test3@lasse.cc", "Lasse H3"));
+  return $res;
 }
 ?>
