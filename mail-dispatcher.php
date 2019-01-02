@@ -93,7 +93,7 @@ function getrecipients() {
   $query = "SELECT * FROM recipients";
   $result = mysqli_query($db, $query);
 
-  $recipients;
+  $recipients = array("mailaddress", "firstname", "lastname");
   while($row = mysqli_fetch_object($result)) {
     array_push($recipients, array($row->mailaddress, $row->firstname, $row->lastname));
   }
