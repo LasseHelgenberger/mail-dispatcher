@@ -97,7 +97,8 @@ function getrecipients() {
   while($row = mysqli_fetch_object($result)) {
     array_push($recipients, array($row->mailaddress, $row->firstname, $row->lastname));
   }
-
+for($i = 0; $i < sizeof($recipients); $i++) {
+echo "DEBUG: ".$recipients[$i][0]." ".$recipients[$i][1]." ".$recipients[$i][2]; }
   return $recipients;
 }
 ?>
