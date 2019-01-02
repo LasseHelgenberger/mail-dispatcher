@@ -40,7 +40,6 @@ echo "SUBJECT: ".$subject."\n";
 echo "BODY:".$body."\n\n";
 
 //TODO check for Attachements
-echo "DEBUG: ".$cred_mailuser;
   // ... forward email
     forwardemail($from_address, $from_name, $subject, $body);
   }
@@ -65,8 +64,9 @@ function forwardemail($from_address, $from_name, $subject, $body) {
     $mail->SMTPSecure = "tls";
     $mail->Port = 587;
 
+echo "DEBUG: ".$recipients[$i][0]." ".$recipients[$i][1]." ".$recipients[$i][2];
     $mail->setFrom($cred_mailfrom, $cred_mailname);
-    $mail->addAddress($recipients[$i][0], $recipients[$i][1]);
+    $mail->addAddress($recipients[$i][0], $recipients[$i][1]." ".$recipients[$i][2]);
     $mail->addReplyTo($from_address, $from_name);
 
     $mail->isHTML(true);
@@ -98,7 +98,6 @@ function getrecipients() {
     array_push($recipients, array($row->mailaddress, $row->firstname, $row->lastname));
   }
 
-//  $res = array(array("test1@lasse.cc", "Lasse H1"), array("test2@lasse.cc", "Lasse H2"), array("test3@lasse.cc", "Lasse H3"));
   return $recipients;
 }
 ?>
