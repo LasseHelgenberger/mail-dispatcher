@@ -50,8 +50,6 @@ echo "DEBUG: ".$cred_mailuser;
 
 
 function forwardemail($from_address, $from_name, $subject, $body) {
-//TODO
-
   require('./vendor/autoload.php');
   require('credentials.php');
   $recipients = getrecipients();
@@ -86,6 +84,17 @@ function forwardemail($from_address, $from_name, $subject, $body) {
 
 function getrecipients() {
 //TODO
+
+  $db = mysqli_connect($cred_mysqlhost, $cred_mysqluser, $cred_mysqlpasswd, $cred_mysqldb);
+  if(!$db) {
+    exit("CONNECTION-ERROR: ".mysqli_connect_error());
+  }
+  $query = "SELECT * FROM recipients";
+  $result = mysqli_query($db, $query);
+
+  while($row = mysqli_fetch_object($result)) {
+    echo $row->mailaddress."\n";
+  }
 
   $res = array(array("test1@lasse.cc", "Lasse H1"), array("test2@lasse.cc", "Lasse H2"), array("test3@lasse.cc", "Lasse H3"));
   return $res;
