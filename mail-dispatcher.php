@@ -20,8 +20,6 @@ maildispatcher();
 function maildispatcher() {
 require_once('credentials.php');
 
-echo "DEBUG: ".$cred_mailuser;
-
 //open imap stream
 $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
 
@@ -40,7 +38,7 @@ echo "SUBJECT: ".$subject."\n";
 echo "BODY:".$body."\n\n";
 
 //TODO check for Attachements
-
+echo "DEBUG: ".$cred_mailuser;
   // ... forward email
   forwardemail($from, $subject, $body);
 }
