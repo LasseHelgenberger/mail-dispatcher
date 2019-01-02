@@ -54,7 +54,7 @@ function forwardemail($from_address, $from_name, $subject, $body) {
   require('credentials.php');
   $recipients = getrecipients();
 
-  for($i = 0; $i < sizeof($recipients); $i++) {
+  for($i = 1; $i < sizeof($recipients); $i++) {
     $mail = new PHPMailer(true);
 
     $mail->isSMTP();
