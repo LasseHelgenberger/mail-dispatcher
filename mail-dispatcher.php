@@ -85,6 +85,8 @@ function forwardemail($from_address, $from_name, $subject, $body) {
 function getrecipients() {
 //TODO
 
+  require('credentials.php');
+
   $db = mysqli_connect($cred_mysqlhost, $cred_mysqluser, $cred_mysqlpasswd, $cred_mysqldb);
   if(!$db) {
     exit("CONNECTION-ERROR: ".mysqli_connect_error());
