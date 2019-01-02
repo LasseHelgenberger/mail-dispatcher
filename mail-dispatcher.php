@@ -21,15 +21,17 @@ include 'credentials.php';
 $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
 
 echo "postfächer";
-$folders = imap_listmailbox($mbox, $cred_mailbox,"*");
+$headers = imap_headers($mbox);
 
-if($folders == false) {
+if($headers == false) {
   echo "fehlgeschlagen";
 } else {
-  foreach($folders as $val) {
+  foreach($headers as $val) {
     echo $val."\n";
   }
 }
+
+imap_close($mbox);
 // If new Mail: Send to everyone
 }
 
