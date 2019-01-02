@@ -14,11 +14,12 @@ or contact mail-dispatcher@lasse.cc
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require_once('credentials.php');
 
 maildispatcher();
 
 function maildispatcher() {
+
+require('credentials.php');
 
 //open imap stream
 $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
@@ -50,7 +51,7 @@ imap_close($mbox);
 function forwardemail($from, $subject, $body) {
 //TODO
 
-require_once('./vendor/autoload.php');
+require('./vendor/autoload.php');
 
 $mail = new PHPMailer(true);
 
