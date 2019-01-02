@@ -28,7 +28,8 @@ $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
 for($i = 0; $i < 1; $i++) {
   // ...get the header info
   $header = imap_headerinfo($mbox, $i+1);
-  $from = $header->fromaddress;
+//  $from = $header->fromaddress; <-- NOT WORKING HOW I INTENDED
+$from = "me@lasse.cc";
   $subject = $header->Subject;
 echo "FROM: ".$from."\n";
 echo "SUBJECT: ".$subject."\n";
@@ -50,6 +51,7 @@ function forwardemail($from, $subject, $body) {
 //TODO
 
 require_once('./vendor/autoload.php');
+require_once('credentials.php');
 
 $mail = new PHPMailer(true);
 
