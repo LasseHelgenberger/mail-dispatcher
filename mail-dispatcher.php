@@ -48,17 +48,8 @@ imap_close($mbox);
 
 function forwardemail($from, $subject, $body) {
 //TODO
-//$recipients = getrecipients();
-//include 'credentials.php';
-//$mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
-
-//for($i = 0; $i < sizeof($recipients); $i++) {
-//  imap_mail($recipients[$i], $subject, $body);
-//}
-//imap_close($mbox);
 
 require_once('./vendor/autoload.php');
-require_once('credentials.php');
 
 $mail = new PHPMailer(true);
 
@@ -84,18 +75,6 @@ if($mail->send()) {
 } else {
   echo "ERROR";
 }
-
-/*$mail = new PHPMailer();
-$mail->setFrom("MAILADRESSE", "NAME");
-$mail->addAddress("test@lasse.cc", "TEST NAME");
-$mail->isHTML(true);
-$mail->Subject = $subject;
-$mail->Body = $body;
-if($mail->send()) {
-  echo "DONE";
-} else {
-  echo "ERROR";
-} */
 }
 
 function getrecipients() {
