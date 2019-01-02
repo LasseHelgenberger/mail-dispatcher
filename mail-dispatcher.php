@@ -45,12 +45,13 @@ imap_close($mbox);
 function forwardemail($from, $subject, $body) {
 //TODO
 $recipients = getrecipients();
-
+include 'credentials.php';
 $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
 
 for($i = 0; $i < sizeof($recipients); $i++) {
   imap_mail($recipients[$i], $subject, $body);
 }
+imap_close($mbox);
 }
 
 function getrecipients() {
