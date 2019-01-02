@@ -12,6 +12,9 @@ or contact mail-dispatcher@lasse.cc
 
 */
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 maildispatcher();
 
 function maildispatcher() {
