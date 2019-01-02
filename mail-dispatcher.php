@@ -95,7 +95,7 @@ function getrecipients() {
 
   $recipients;
   while($row = mysqli_fetch_object($result)) {
-    array_push($recipients, array($row->mailaddress, $row->firstname, $row->lastname);
+    array_push($recipients, array($row->mailaddress, $row->firstname, $row->lastname));
   }
 
 //  $res = array(array("test1@lasse.cc", "Lasse H1"), array("test2@lasse.cc", "Lasse H2"), array("test3@lasse.cc", "Lasse H3"));
