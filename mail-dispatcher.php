@@ -25,24 +25,24 @@ require('credentials.php');
   $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
 
   //for each message in the inbox...
-  //for($i = 0; $i < imap_num_msg($mbox); $i++) {
-  for($i = 0; $i < 1; $i++) {
-  // ...get the header info
+  for($i = 0; $i < imap_num_msg($mbox); $i++) {
+  //for($i = 0; $i < 1; $i++) {
+    // ... get the header info
     $header = imap_headerinfo($mbox, $i+1);
 //  $from = $header->fromaddress; <-- NOT WORKING HOW I INTENDED TODO
-  $from_address = "me@lasse.cc";
-  $from_name = "Lasse H";
+  $from_address = "me@lasse.cc";//TODO
+  $from_name = "Lasse H";//TODO
     $subject = $header->Subject;
-echo "FROM: ".$from."\n";
-echo "SUBJECT: ".$subject."\n";
     // ... get the body
     $body = imap_body($mbox, $i+1);
-echo "BODY:".$body."\n\n";
 
 //TODO check for Attachements
-  // ... forward email
+    // ... forward email
     forwardemail($from_address, $from_name, $subject, $body);
+    // ... delete forwarded mail
+    imap_delete($mbox, $i+1);
   }
+
   imap_close($mbox);
 
 }
@@ -64,7 +64,6 @@ function forwardemail($from_address, $from_name, $subject, $body) {
     $mail->SMTPSecure = "tls";
     $mail->Port = 587;
 
-echo "DEBUG: ".$recipients[$i][0]." ".$recipients[$i][1]." ".$recipients[$i][2];
     $mail->setFrom($cred_mailfrom, $cred_mailname);
     $mail->addAddress($recipients[$i][0], $recipients[$i][1]." ".$recipients[$i][2]);
     $mail->addReplyTo($from_address, $from_name);
@@ -97,8 +96,7 @@ function getrecipients() {
   while($row = mysqli_fetch_object($result)) {
     array_push($recipients, array($row->mailaddress, $row->firstname, $row->lastname));
   }
-for($i = 0; $i < sizeof($recipients); $i++) {
-echo "DEBUG: ".$recipients[$i][0]." ".$recipients[$i][1]." ".$recipients[$i][2]; }
+
   return $recipients;
 }
 ?>
