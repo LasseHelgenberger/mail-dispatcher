@@ -20,14 +20,14 @@ include 'credentials.php';
 // Check for new Mail
 $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
 
-echo "postfächer";
 $headers = imap_headers($mbox);
 
 if($headers == false) {
   echo "fehlgeschlagen";
 } else {
-  foreach($headers as $val) {
-    echo $val."\n";
+  for($i = 0; $i < sizeof($headers); $i++) {
+    echo $headers[$i]."\n";
+    echo "BODY:".imap_body($mbox, $i)."\n\n";
   }
 }
 
