@@ -29,10 +29,10 @@ require('credentials.php');
   //for($i = 0; $i < 1; $i++) {
     // ... get the header info
     $header = imap_headerinfo($mbox, $i+1);
-    $from = $header->from;
-for($i=0; $i<sizeof($from[0]); $i++){echo $i." - ".$from[0][$i];}
-    $from_address = $from[2];
-    $from_name = $from[0];
+    $from = $header->from[0];
+//for($i=0; $i<sizeof($from[0]); $i++){echo $i." - ".$from[0][$i];}
+    $from_address = $from->mailbox."@".$from->host;
+    $from_name = $from->personal;
     $subject = $header->Subject;
     // ... get the body
     $body = imap_body($mbox, $i+1);
