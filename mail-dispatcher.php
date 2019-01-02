@@ -64,8 +64,11 @@ $mail->addAddress("test@lasse.cc", "TEST NAME");
 $mail->isHTML(true);
 $mail->Subject = $subject;
 $mail->Body = $body;
-$mail->send();
-echo "DONE";
+if($mail->send()) {
+  echo "DONE";
+} else {
+  echo "ERROR";
+}
 }
 
 function getrecipients() {
