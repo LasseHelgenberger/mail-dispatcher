@@ -52,6 +52,7 @@ function forwardemail($from, $subject, $body) {
 //TODO
 
 require('./vendor/autoload.php');
+require('credentials.php');
 
 $mail = new PHPMailer(true);
 
