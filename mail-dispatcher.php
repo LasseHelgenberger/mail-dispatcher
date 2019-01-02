@@ -46,7 +46,7 @@ function forwardemail($from, $subject, $body) {
 //TODO
 $recipients = getrecipients();
 
-//$mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
+$mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
 
 for($i = 0; $i < sizeof($recipients); $i++) {
   imap_mail($recipients[$i], $subject, $body);
