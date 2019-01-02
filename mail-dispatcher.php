@@ -18,7 +18,7 @@ use PHPMailer\PHPMailer\Exception;
 maildispatcher();
 
 function maildispatcher() {
-include 'credentials.php';
+require_once('credentials.php');
 
 //open imap stream
 $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
@@ -58,6 +58,7 @@ function forwardemail($from, $subject, $body) {
 //imap_close($mbox);
 
 require_once('./vendor/autoload.php');
+require_once('credentials.php');
 
 $mail = new PHPMailer(true);
 
