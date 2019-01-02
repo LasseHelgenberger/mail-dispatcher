@@ -12,11 +12,10 @@ or contact mail-dispatcher@lasse.cc
 
 */
 
-include('credentials.php');
-
 maildispatcher();
 
 function maildispatcher() {
+include 'credentials.php';
 
 // Check for new Mail
 $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
