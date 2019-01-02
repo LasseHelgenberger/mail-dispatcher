@@ -12,6 +12,8 @@ or contact mail-dispatcher@lasse.cc
 
 */
 
+include('credentials.php');
+
 maildispatcher();
 
 function maildispatcher() {
