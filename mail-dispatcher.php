@@ -20,7 +20,7 @@ maildispatcher();
 function maildispatcher() {
 require_once('credentials.php');
 
-echo "DEBUG: ".$credmailuser;
+echo "DEBUG: ".$cred_mailuser;
 
 //open imap stream
 $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
