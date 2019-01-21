@@ -17,8 +17,12 @@ or contact mail-dispatcher@lasse.cc
 
 
 
-// IMAP CREDENTIALS
+// INCOMING MAIL CREDENTIALS
 $cred_mailbox = "{localhost:993/imap/ssl}INBOX";
+$cred_mailuser = "mail@address.com";
+$cred_mailpasswd = "passwd";
+
+// OUTGOING MAIL CREDENTIALS
 $cred_smtphost = "smtp.address.com";
 $cred_mailuser = "mail@address.com";
 $cred_mailpasswd = "passwd";
