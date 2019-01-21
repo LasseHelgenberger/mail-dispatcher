@@ -22,7 +22,7 @@ function maildispatcher() {
 require('credentials.php');
 
   //open imap stream
-  $mbox = imap_open($cred_mailbox, $cred_mailuser, $cred_mailpasswd);
+  $mbox = imap_open($cred_in_mailbox, $cred_in_mailuser, $cred_in_mailpasswd);
 
   //for each message in the inbox...
   for($i = 0; $i < imap_num_msg($mbox); $i++) {
@@ -58,14 +58,14 @@ function forwardemail($from_address, $from_name, $subject, $body) {
     $mail = new PHPMailer(true);
 
     $mail->isSMTP();
-    $mail->Host = $cred_smtphost;
+    $mail->Host = $cred_out_smtphost;
     $mail->SMTPAuth = true;
-    $mail->Username = $cred_mailuser;
-    $mail->Password = $cred_mailpasswd;
+    $mail->Username = $cred_out_mailuser;
+    $mail->Password = $cred_out_mailpasswd;
     $mail->SMTPSecure = "tls";
     $mail->Port = 587;
 
-    $mail->setFrom($cred_mailfrom, $cred_mailname);
+    $mail->setFrom($cred_out_mailfrom, $cred_out_mailname);
     $mail->addAddress($recipients[$i][0], $recipients[$i][1]." ".$recipients[$i][2]);
     $mail->addReplyTo($from_address, $from_name);
 
