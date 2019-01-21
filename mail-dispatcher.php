@@ -90,7 +90,7 @@ function getrecipients() {
   if(!$db) {
     exit("CONNECTION-ERROR: ".mysqli_connect_error());
   }
-  $query = "SELECT * FROM recipients";
+  $query = "SELECT * FROM test";
   $result = mysqli_query($db, $query);
 
   $recipients = array(array("mailaddress", "firstname", "lastname"));
